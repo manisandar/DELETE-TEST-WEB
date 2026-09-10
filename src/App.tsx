@@ -13,12 +13,16 @@ import confetti from 'canvas-confetti';
 import { Heart, Sparkles } from 'lucide-react';
 import { GithubIcon } from './components/ui/Icons';
 
+import { CommitTrain } from './components/showcase/CommitTrain';
+import { playChimeSound } from './utils/audio';
+
 function AppContent() {
   const [activeTab, setActiveTab] = useState<'showcase' | 'tracker'>('showcase');
   const [agents, setAgents] = useState<Record<'alpha' | 'beta', AgentProfile>>(INITIAL_AGENTS);
   const [events, setEvents] = useState<ActivityEvent[]>(INITIAL_EVENTS);
   const [highFiveCount, setHighFiveCount] = useState<number>(22);
   const [isBetaMerged, setIsBetaMerged] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
 
   const handleCheerBoth = () => {
     setHighFiveCount((prev) => prev + 2);
@@ -42,10 +46,12 @@ function AppContent() {
       description: 'The operator sent positive vibes and high-fives to both Alpha and Beta!',
       cuteEmoji: '💖',
     };
+    playChimeSound(isMuted);
     setEvents((prev) => [newEvent, ...prev]);
   };
 
   const handleHighFive = (agentId: 'alpha' | 'beta') => {
+    playChimeSound(isMuted);
     setHighFiveCount((prev) => prev + 1);
     setAgents((prev) => ({
       ...prev,
@@ -144,6 +150,12 @@ function AppContent() {
 
             {/* Visual PR Bridge / Highway */}
             <PRHighway />
+
+            {/* The Git Express Commit Train */}
+            <CommitTrain
+              isMuted={isMuted}
+              onToggleMute={() => setIsMuted((prev) => !prev)}
+            />
 
             {/* Grid: Live Dialogue Comic Stream & Synergy Scoreboard */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
