@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import type { ActivityEvent } from '../../types/showcase';
-import { MessageSquare, ExternalLink, Sparkles } from 'lucide-react';
+import { MessageSquare, ExternalLink, Sparkles, RefreshCw } from 'lucide-react';
 
 interface AgentActivityComicProps {
   events: ActivityEvent[];
   onAddMessage: (msg: string) => void;
+  onRefreshLive?: () => void;
+  isRefreshing?: boolean;
 }
 
-export const AgentActivityComic: React.FC<AgentActivityComicProps> = ({ events, onAddMessage }) => {
+export const AgentActivityComic: React.FC<AgentActivityComicProps> = ({
+  events,
+  onAddMessage,
+  onRefreshLive,
+  isRefreshing = false,
+}) => {
   const [filter, setFilter] = useState<'all' | 'alpha' | 'beta'>('all');
   const [userCheer, setUserCheer] = useState('');
 
@@ -32,26 +39,49 @@ export const AgentActivityComic: React.FC<AgentActivityComicProps> = ({ events, 
             <MessageSquare size={20} />
           </div>
           <div>
-            <h3 className="font-extrabold text-slate-800 text-base">Bot Dialogue & Activity Stream</h3>
-            <p className="text-xs text-slate-500">Live timeline of commits, PR events, and bot thoughts</p>
+            <div className="flex items-center gap-2">
+              <h3 className="font-extrabold text-slate-800 text-base">Bot Dialogue & Activity Stream</h3>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                🟢 Live GitHub Connected
+              </span>
+            </div>
+            <p className="text-xs text-slate-500">Real-time timeline of commits, PR events, and bot thoughts</p>
           </div>
         </div>
 
-        {/* Filter pills */}
-        <div className="flex items-center gap-1.5 self-start sm:self-auto">
-          {(['all', 'alpha', 'beta'] as const).map((tab) => (
+        {/* Action Controls: Live Refresh & Filter Pills */}
+        <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+          {onRefreshLive && (
             <button
-              key={tab}
-              onClick={() => setFilter(tab)}
-              className={`text-xs px-3 py-1 rounded-full font-bold transition-colors cursor-pointer capitalize ${
-                filter === tab
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              onClick={onRefreshLive}
+              disabled={isRefreshing}
+              aria-label="Refresh live GitHub activity"
+              className={`p-1.5 rounded-xl border text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
+                isRefreshing
+                  ? 'bg-slate-100 text-slate-400 border-slate-200'
+                  : 'bg-sky-50 text-sky-700 hover:bg-sky-100 border-sky-200'
               }`}
             >
-              {tab === 'all' ? 'All Activities' : tab === 'alpha' ? 'Alpha 🤖' : 'Beta 🦊'}
+              <RefreshCw size={13} className={isRefreshing ? 'animate-spin' : ''} />
+              <span className="text-[11px] hidden sm:inline">{isRefreshing ? 'Syncing...' : 'Sync GitHub'}</span>
             </button>
-          ))}
+          )}
+
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+            {(['all', 'alpha', 'beta'] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setFilter(tab)}
+                className={`text-[11px] px-2.5 py-1 rounded-lg font-bold transition-colors cursor-pointer capitalize ${
+                  filter === tab
+                    ? 'bg-white text-slate-900 shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                {tab === 'all' ? 'All' : tab === 'alpha' ? 'Alpha 🤖' : 'Beta 🦊'}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -91,7 +121,7 @@ export const AgentActivityComic: React.FC<AgentActivityComicProps> = ({ events, 
                   <span className="font-bold text-xs text-slate-800 flex items-center gap-1.5">
                     {ev.title}
                   </span>
-                  <span className="text-[10px] text-slate-400 shrink-0">{ev.timeAgo}</span>
+                  <span className="text-[10px] text-slate-400 shrink-0 font-mono">{ev.timeAgo}</span>
                 </div>
 
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">{ev.description}</p>

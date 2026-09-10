@@ -61,5 +61,13 @@ describe('Cute Dual-Agent Collaboration Showcase App', () => {
     fireEvent.click(dispatchBtn);
     expect(screen.getByText(/Express in Transit/i)).toBeDefined();
   });
+
+  it('renders live GitHub sync controls and status badge', () => {
+    render(<App />);
+    expect(screen.getByText(/Live GitHub Connected/i)).toBeDefined();
+    const syncBtn = screen.getByRole('button', { name: /Refresh live GitHub activity/i });
+    expect(syncBtn).toBeDefined();
+    fireEvent.click(syncBtn);
+  });
 });
 
