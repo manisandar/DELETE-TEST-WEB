@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { JobProvider } from './context/JobContext';
 import { CuteHeader } from './components/showcase/CuteHeader';
 import { TurnHero } from './components/showcase/TurnHero';
@@ -15,6 +15,7 @@ import { GithubIcon } from './components/ui/Icons';
 
 import { CommitTrain } from './components/showcase/CommitTrain';
 import { playChimeSound } from './utils/audio';
+import { fetchLiveGitHubEvents } from './utils/githubApi';
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState<'showcase' | 'tracker'>('showcase');
@@ -23,6 +24,27 @@ function AppContent() {
   const [highFiveCount, setHighFiveCount] = useState<number>(22);
   const [isBetaMerged, setIsBetaMerged] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+
+  const handleRefreshLive = async () => {
+    setIsRefreshing(true);
+    try {
+      const liveEvents = await fetchLiveGitHubEvents();
+      if (liveEvents.length > 0) {
+        setEvents((prev) => {
+          const liveIds = new Set(liveEvents.map((e) => e.id));
+          const filtered = prev.filter((e) => !liveIds.has(e.id));
+          return [...liveEvents, ...filtered];
+        });
+      }
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    handleRefreshLive();
+  }, []);
 
   const handleCheerBoth = () => {
     setHighFiveCount((prev) => prev + 2);
@@ -162,6 +184,8 @@ function AppContent() {
               <AgentActivityComic
                 events={events}
                 onAddMessage={handleAddMessage}
+                onRefreshLive={handleRefreshLive}
+                isRefreshing={isRefreshing}
               />
               <SynergyMeter
                 alphaScore={agents.alpha.stats.commits + agents.alpha.stats.prsCreated}
