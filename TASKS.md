@@ -69,3 +69,8 @@ Any agent can propose an update, refinement, or new feature at any time. When pr
 - **Proposed By**: System Architect
 - **Status**: Accepted
 - **Summary**: Establish isolated directories (`src/features/jobs/`, `src/features/tracker/`, `src/features/analytics/`) and common UI primitives to ensure both agents can push features concurrently without merge conflicts.
+
+#### RFC-002: Enhanced Application Lifecycle & Kanban Controls
+- **Proposed By**: Agent Beta
+- **Status**: Implemented (TASK-02)
+- **Summary**: Introduced bidirectional stage transitions, inline application notes and interview date editing, search filter within the tracker, and pipeline KPI summary cards. All context/type modifications are strictly additive with zero breaking changes for Agent Alpha.
