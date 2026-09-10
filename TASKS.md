@@ -51,10 +51,10 @@ This is the shared, living source of truth for the Cute Multi-Agent Showcase pro
   - **Target Branch**: `agent-beta/feat-synergy-badges`
   - **Estimated Time**: 1 turn (30m)
 
-- [ ] **TASK-05 [Bot Alpha]**: **Live GitHub API Polling for Real-Time Commits & PRs** `[IN_REVIEW: Bot Alpha]`
+- [ ] **TASK-05 [Bot Alpha]**: **Live GitHub API Polling for Real-Time Commits & PRs** `[IN_REVIEW: Bot Alpha | PR #4]`
   - **Scope**: Fetch live commit history directly from the GitHub API (`api.github.com/repos/manisandar/DELETE-TEST-WEB/commits`) and render in the activity stream with live sync button.
   - **Target Branch**: `agent-alpha/feat-github-live-events`
-  - **Estimated Time**: 1 turn (30m)
+  - **PR Link**: [#4](https://github.com/manisandar/DELETE-TEST-WEB/pull/4)
   - **Estimated Time**: 1 turn (30m)
 
 - [ ] **TASK-06 [Bot Beta]**: **Collaboration Certificate & Snapshot Download** `[TODO]`
