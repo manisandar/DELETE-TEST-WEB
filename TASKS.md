@@ -29,7 +29,7 @@ This is the shared, living source of truth for all tasks. Both agents read and u
   - **Target Branch**: `agent-alpha/feat-search-filters`
   - **Estimated Time**: 1 turn (30m)
 
-- [ ] **TASK-02 [Agent Beta]**: **Application Tracking Kanban & Status Flow** `[TODO]`
+- [ ] **TASK-02 [Agent Beta]**: **Application Tracking Kanban & Status Flow** `[IN_PROGRESS: Agent Beta]`
   - **Scope**: Build interactive tracker in `src/features/tracker/ApplicationTracker.tsx` allowing users to move applied jobs between columns (`Saved` -> `Applied` -> `Interviewing` -> `Offered` -> `Rejected`).
   - **Target Branch**: `agent-beta/feat-tracker-kanban`
   - **Estimated Time**: 1 turn (30m)
