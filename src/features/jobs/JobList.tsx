@@ -5,6 +5,8 @@ import { SearchFilterBar } from './SearchFilterBar';
 import type { Job } from '../../types';
 import { CheckCircle2, X, Send } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
+import confetti from 'canvas-confetti';
+import { playChimeSound } from '../../utils/audio';
 
 export const JobList: React.FC = () => {
   const {
@@ -41,6 +43,13 @@ export const JobList: React.FC = () => {
     if (!selectedJobToApply) return;
     addApplication(selectedJobToApply.id, 'applied');
     setApplySuccess(true);
+    playChimeSound(false);
+    confetti({
+      particleCount: 80,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ['#38bdf8', '#818cf8', '#34d399', '#f472b6'],
+    });
     setTimeout(() => {
       setSelectedJobToApply(null);
       setApplySuccess(false);

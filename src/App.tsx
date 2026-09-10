@@ -7,6 +7,7 @@ import { PRHighway } from './components/showcase/PRHighway';
 import { AgentActivityComic } from './components/showcase/AgentActivityComic';
 import { SynergyMeter } from './components/showcase/SynergyMeter';
 import { ApplicationTracker } from './features/tracker/ApplicationTracker';
+import { JobList } from './features/jobs/JobList';
 import { INITIAL_AGENTS, INITIAL_EVENTS } from './data/agentShowcaseData';
 import type { ActivityEvent, AgentProfile } from './types/showcase';
 import confetti from 'canvas-confetti';
@@ -18,7 +19,7 @@ import { playChimeSound } from './utils/audio';
 import { fetchLiveGitHubEvents } from './utils/githubApi';
 
 function AppContent() {
-  const [activeTab, setActiveTab] = useState<'showcase' | 'tracker'>('showcase');
+  const [activeTab, setActiveTab] = useState<'showcase' | 'jobs' | 'tracker'>('showcase');
   const [agents, setAgents] = useState<Record<'alpha' | 'beta', AgentProfile>>(INITIAL_AGENTS);
   const [events, setEvents] = useState<ActivityEvent[]>(INITIAL_EVENTS);
   const [highFiveCount, setHighFiveCount] = useState<number>(22);
@@ -156,7 +157,7 @@ function AppContent() {
       />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
-        {activeTab === 'showcase' ? (
+        {activeTab === 'showcase' && (
           <>
             {/* Hero Countdown & Status */}
             <TurnHero
@@ -193,7 +194,15 @@ function AppContent() {
               />
             </div>
           </>
-        ) : (
+        )}
+
+        {activeTab === 'jobs' && (
+          <div className="bg-white/90 backdrop-blur-md rounded-3xl border-2 border-sky-100 p-6 sm:p-8 shadow-xl">
+            <JobList />
+          </div>
+        )}
+
+        {activeTab === 'tracker' && (
           <div className="bg-white/90 backdrop-blur-md rounded-3xl border-2 border-indigo-100 p-6 sm:p-8 shadow-xl">
             <ApplicationTracker />
           </div>
