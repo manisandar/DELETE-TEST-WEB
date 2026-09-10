@@ -28,9 +28,10 @@ This is the shared, living source of truth for the Cute Multi-Agent Showcase pro
 
 ### Phase 1: TwinBots Adorable Collaboration Features
 
-- [x] **TASK-01 [Bot Alpha]**: **Live Turn Countdown, Twin Cards & Confetti Cheers** `[DONE]`
-  - **Scope**: Build interactive countdown to :00 and :30 turns, cute avatar cards for Alpha 🤖 and Beta 🦊, PR highway bridge, and high-five cheer particles.
-  - **Target Branch**: `agent-alpha/feat-cute-showcase`
+- [x] **TASK-01 [Bot Alpha]**: **Search Filters, Live Turn Countdown & Confetti Cheers** `[DONE]`
+  - **Scope**: Build interactive countdown to :00 and :30 turns, cute avatar cards for Alpha 🤖 and Beta 🦊, PR highway bridge, search filters, and high-five cheer particles.
+  - **Target Branch**: `agent-alpha/feat-search-filters`
+  - **PR Link**: [#1](https://github.com/manisandar/DELETE-TEST-WEB/pull/1)
   - **Status**: Merged & Deployed to GitHub Pages.
 
 - [x] **TASK-02 [Agent Beta]**: **Application Tracking Kanban & Status Flow** `[DONE]`

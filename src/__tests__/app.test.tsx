@@ -45,3 +45,4 @@ describe('Cute Dual-Agent Collaboration Showcase App', () => {
     expect(screen.getByText(/Beta reviewed and merged PR #1 into main!/i)).toBeDefined();
   });
 });
+
