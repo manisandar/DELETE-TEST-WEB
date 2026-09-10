@@ -1,15 +1,22 @@
 import React from 'react';
 import { GithubIcon } from '../ui/Icons';
-import { GitPullRequest } from 'lucide-react';
+import { GitPullRequest, Sparkles, CheckSquare } from 'lucide-react';
 
 interface CuteHeaderProps {
   onSimulateBetaTurn: () => void;
   isBetaMerged: boolean;
+  activeTab: 'showcase' | 'tracker';
+  setActiveTab: (tab: 'showcase' | 'tracker') => void;
 }
 
-export const CuteHeader: React.FC<CuteHeaderProps> = ({ onSimulateBetaTurn, isBetaMerged }) => {
+export const CuteHeader: React.FC<CuteHeaderProps> = ({
+  onSimulateBetaTurn,
+  isBetaMerged,
+  activeTab,
+  setActiveTab,
+}) => {
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-indigo-100 shadow-2xs">
+    <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-indigo-100 shadow-2xs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         {/* Brand */}
         <div className="flex items-center gap-2.5">
@@ -20,12 +27,39 @@ export const CuteHeader: React.FC<CuteHeaderProps> = ({ onSimulateBetaTurn, isBe
             <div className="flex items-center gap-1.5">
               <span className="font-extrabold text-slate-800 text-base tracking-tight">TwinBots Hub</span>
               <span className="text-[10px] font-bold px-2 py-0.2 bg-gradient-to-r from-sky-100 to-pink-100 text-purple-700 rounded-full border border-purple-200">
-                v2.0 Cute UI
+                v2.0
               </span>
             </div>
             <p className="text-[11px] text-slate-500">Autonomous Dual-Agent Activity Showcase</p>
           </div>
         </div>
+
+        {/* Tab Navigation */}
+        <nav className="flex items-center gap-1 bg-slate-100/80 p-1 rounded-xl border border-slate-200">
+          <button
+            onClick={() => setActiveTab('showcase')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'showcase'
+                ? 'bg-white text-indigo-700 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <Sparkles size={13} className="text-amber-500" />
+            <span>Showcase</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('tracker')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'tracker'
+                ? 'bg-white text-indigo-700 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <CheckSquare size={13} className="text-purple-600" />
+            <span>Application Tracker</span>
+          </button>
+        </nav>
 
         {/* Right action links */}
         <div className="flex items-center gap-2 sm:gap-3">
@@ -40,7 +74,10 @@ export const CuteHeader: React.FC<CuteHeaderProps> = ({ onSimulateBetaTurn, isBe
             }`}
           >
             <GitPullRequest size={13} />
-            <span>{isBetaMerged ? 'Beta Merged PR #1! 🎉' : 'Simulate Beta Turn 🦊'}</span>
+            <span className="hidden sm:inline">
+              {isBetaMerged ? 'Beta Merged PR #1! 🎉' : 'Simulate Beta Turn 🦊'}
+            </span>
+            <span className="sm:hidden">{isBetaMerged ? 'Merged 🎉' : 'Beta 🦊'}</span>
           </button>
 
           {/* GitHub Repo link */}
@@ -51,7 +88,7 @@ export const CuteHeader: React.FC<CuteHeaderProps> = ({ onSimulateBetaTurn, isBe
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors shadow-2xs"
           >
             <GithubIcon size={14} />
-            <span className="hidden sm:inline">DELETE-TEST-WEB</span>
+            <span className="hidden md:inline">DELETE-TEST-WEB</span>
           </a>
         </div>
       </div>

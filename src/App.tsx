@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import { JobProvider } from './context/JobContext';
 import { CuteHeader } from './components/showcase/CuteHeader';
 import { TurnHero } from './components/showcase/TurnHero';
 import { AgentTwinCards } from './components/showcase/AgentTwinCards';
 import { PRHighway } from './components/showcase/PRHighway';
 import { AgentActivityComic } from './components/showcase/AgentActivityComic';
 import { SynergyMeter } from './components/showcase/SynergyMeter';
+import { ApplicationTracker } from './features/tracker/ApplicationTracker';
 import { INITIAL_AGENTS, INITIAL_EVENTS } from './data/agentShowcaseData';
 import type { ActivityEvent, AgentProfile } from './types/showcase';
 import confetti from 'canvas-confetti';
 import { Heart, Sparkles } from 'lucide-react';
 import { GithubIcon } from './components/ui/Icons';
 
-export function App() {
+function AppContent() {
+  const [activeTab, setActiveTab] = useState<'showcase' | 'tracker'>('showcase');
   const [agents, setAgents] = useState<Record<'alpha' | 'beta', AgentProfile>>(INITIAL_AGENTS);
   const [events, setEvents] = useState<ActivityEvent[]>(INITIAL_EVENTS);
   const [highFiveCount, setHighFiveCount] = useState<number>(22);
@@ -120,35 +123,45 @@ export function App() {
       <CuteHeader
         onSimulateBetaTurn={handleSimulateBetaTurn}
         isBetaMerged={isBetaMerged}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
       />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
-        {/* Hero Countdown & Status */}
-        <TurnHero
-          onCheerBoth={handleCheerBoth}
-          highFiveCount={highFiveCount}
-        />
+        {activeTab === 'showcase' ? (
+          <>
+            {/* Hero Countdown & Status */}
+            <TurnHero
+              onCheerBoth={handleCheerBoth}
+              highFiveCount={highFiveCount}
+            />
 
-        {/* Adorable Twin Cards for Alpha & Beta */}
-        <AgentTwinCards
-          agents={agents}
-          onHighFive={handleHighFive}
-        />
+            {/* Adorable Twin Cards for Alpha & Beta */}
+            <AgentTwinCards
+              agents={agents}
+              onHighFive={handleHighFive}
+            />
 
-        {/* Visual PR Bridge / Highway */}
-        <PRHighway />
+            {/* Visual PR Bridge / Highway */}
+            <PRHighway />
 
-        {/* Grid: Live Dialogue Comic Stream & Synergy Scoreboard */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-          <AgentActivityComic
-            events={events}
-            onAddMessage={handleAddMessage}
-          />
-          <SynergyMeter
-            alphaScore={agents.alpha.stats.commits + agents.alpha.stats.prsCreated}
-            betaScore={agents.beta.stats.commits + agents.beta.stats.prsReviewed + (isBetaMerged ? 1 : 0)}
-          />
-        </div>
+            {/* Grid: Live Dialogue Comic Stream & Synergy Scoreboard */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+              <AgentActivityComic
+                events={events}
+                onAddMessage={handleAddMessage}
+              />
+              <SynergyMeter
+                alphaScore={agents.alpha.stats.commits + agents.alpha.stats.prsCreated}
+                betaScore={agents.beta.stats.commits + agents.beta.stats.prsReviewed + (isBetaMerged ? 1 : 0)}
+              />
+            </div>
+          </>
+        ) : (
+          <div className="bg-white/90 backdrop-blur-md rounded-3xl border-2 border-indigo-100 p-6 sm:p-8 shadow-xl">
+            <ApplicationTracker />
+          </div>
+        )}
       </main>
 
       {/* Cute Footer */}
@@ -184,6 +197,14 @@ export function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export function App() {
+  return (
+    <JobProvider>
+      <AppContent />
+    </JobProvider>
   );
 }
 

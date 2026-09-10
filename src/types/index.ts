@@ -26,6 +26,10 @@ export interface Application {
   status: ApplicationStatus;
   appliedDate: string;
   notes?: string;
+  interviewDate?: string;
+  salaryOffer?: number;
+  contactPerson?: string;
+  priority?: 'low' | 'medium' | 'high';
 }
 
 export interface FilterState {
