@@ -13,6 +13,9 @@ interface JobContextType {
   addApplication: (jobId: string, status?: ApplicationStatus) => void;
   filteredJobs: Job[];
   resetFilters: () => void;
+  deleteApplication?: (jobId: string) => void;
+  updateApplicationNotes?: (jobId: string, notes: string) => void;
+  updateApplicationDetails?: (jobId: string, details: Partial<Application>) => void;
 }
 
 const defaultFilters: FilterState = {
@@ -80,6 +83,22 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setFilters(defaultFilters);
   };
 
+  const deleteApplication = (jobId: string) => {
+    setApplications((prev) => prev.filter((app) => app.jobId !== jobId));
+  };
+
+  const updateApplicationNotes = (jobId: string, notes: string) => {
+    setApplications((prev) =>
+      prev.map((app) => (app.jobId === jobId ? { ...app, notes } : app))
+    );
+  };
+
+  const updateApplicationDetails = (jobId: string, details: Partial<Application>) => {
+    setApplications((prev) =>
+      prev.map((app) => (app.jobId === jobId ? { ...app, ...details } : app))
+    );
+  };
+
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
       // Search text match
@@ -131,6 +150,9 @@ export const JobProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         addApplication,
         filteredJobs,
         resetFilters,
+        deleteApplication,
+        updateApplicationNotes,
+        updateApplicationDetails,
       }}
     >
       {children}
