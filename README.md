@@ -1,52 +1,54 @@
-# CareerSphere: Multi-Agent Collaborative Frontend
+# 🤖 TwinBots Hub: Adorable Dual-Agent Collaboration Showcase 🦊
 
-A test frontend web application built with **React 19 + TypeScript + Vite + Tailwind CSS** designed specifically to test autonomous pair-programming collaboration between two AI agents working concurrently on the same GitHub repository with separate accounts and scheduled turns.
+> **Live Web App**: [**https://manisandar.github.io/DELETE-TEST-WEB/**](https://manisandar.github.io/DELETE-TEST-WEB/)  
+> **GitHub Repository**: [https://github.com/manisandar/DELETE-TEST-WEB](https://github.com/manisandar/DELETE-TEST-WEB)
 
-- **GitHub Repository**: [https://github.com/manisandar/DELETE-TEST-WEB.git](https://github.com/manisandar/DELETE-TEST-WEB.git)
-
----
-
-## Key Collaboration Features
-
-1. **Zero-Conflict Concurrency**:
-   - Pushes never go directly to `main`.
-   - Each agent operates in its own isolated branch namespace (`agent-alpha/*` vs `agent-beta/*`).
-   - Pushes never fail or overwrite each other even when fired at the exact same second.
-
-2. **Interleaved 30-Minute Schedule**:
-   - **Agent Alpha** runs at `:00` every hour (Domain: Job Search, Feed, Filters).
-   - **Agent Beta** runs at `:30` every hour (Domain: Application Tracker, Kanban, Analytics).
-   - Each turn starts by reviewing and merging the teammate's open Pull Request before starting a new task, ensuring 50/50 contribution on GitHub.
-
-3. **Dormant / Sleeping Laptop Resilience**:
-   - If one agent's laptop goes to sleep or misses turns, a **45-minute self-merge fallback rule** allows the active agent to verify local automated tests and merge without being blocked indefinitely.
-
-4. **Upgradable & Dynamic Tasks**:
-   - Managed via [`TASKS.md`](./TASKS.md).
-   - Contains an active RFC (Request for Comments) section so either agent can propose changes or upgrade planned tasks during execution.
+An adorable, visual web application built with **React 19 + TypeScript + Vite + Tailwind CSS + Canvas Confetti** designed to test and showcase autonomous pair programming between two AI agents working concurrently on the same GitHub repository with separate accounts and 30-minute interleaved turns.
 
 ---
 
-## Essential Documents
+## Cute Interactive Features
 
-- **[`AGENT_INSTRUCTIONS.md`](./AGENT_INSTRUCTIONS.md)**: Operational guide and state-machine checklist for AI agents.
-- **[`TASKS.md`](./TASKS.md)**: Living task board with balance tracker, task allocations, and RFC proposals.
-- **[`SETUP_GUIDE.md`](./SETUP_GUIDE.md)**: Guide for humans on setting up GitHub accounts, collaborator write access, SSH/CLI tokens, and cron schedules.
+- **Live Turn Countdown Capsule**: Real-time timer counting down to the next `:00` or `:30` turn handoff.
+- **Twin Bot Cards**: Meet **Bot Alpha 🤖 ("The Builder Bot")** and **Bot Beta 🦊 ("The Reviewer Fox")** with live thoughts, stats, and high-five buttons.
+- **The PR Highway**: Visual interactive bridge tracking Pull Requests moving from feature branches into `main`.
+- **Bot Dialogue & Activity Stream**: Comic/chat style activity stream tracking commits, PR reviews, and bot messages.
+- **50/50 Synergy & Harmony Meter**: Real-time balance tracker ensuring equal contribution across both GitHub accounts.
+- **Celebration Confetti**: Interactive cheer buttons with colorful party particles!
 
 ---
 
-## Development & Testing
+## How the Autonomous Collaboration Protocol Works
+
+| Feature | Implementation |
+| :--- | :--- |
+| **Zero Push Conflicts** | Strictly namespaced branches (`agent-alpha/*` vs `agent-beta/*`). Agents never push to `main` directly. |
+| **Equal 50/50 Contribution** | Interleaved 30-minute shifts. Each agent reviews and merges the partner's PR first before creating their next PR. |
+| **Sleeping Partner Fallback** | If a laptop sleeps or misses a turn, an active agent self-verifies with `npm test` and self-merges after 45 minutes to prevent blocking. |
+| **Turnkey Launch** | Operator gives a single sentence prompt to launch the second agent. |
+
+---
+
+## Turnkey Prompt for the Other Agent (Bot Beta)
+
+Simply give your agent this single sentence:
+
+> **"Pull `https://github.com/manisandar/DELETE-TEST-WEB.git`, read `OTHER_AGENT_INSTRUCTIONS.md`, and continue the project autonomously."**
+
+---
+
+## Development & Deployment
 
 ```bash
 # Install dependencies
 npm install
-
-# Start local dev server
-npm run dev
 
 # Run automated tests
 npm test
 
 # Build production bundle
 npm run build
+
+# Deploy to GitHub Pages
+npm run deploy
 ```
