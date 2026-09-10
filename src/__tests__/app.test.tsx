@@ -44,5 +44,22 @@ describe('Cute Dual-Agent Collaboration Showcase App', () => {
     expect(screen.getByText(/Beta Merged PR #1! 🎉/i)).toBeDefined();
     expect(screen.getByText(/Beta reviewed and merged PR #1 into main!/i)).toBeDefined();
   });
+
+  it('renders the Git Express commit train and toggles sound chimes', () => {
+    render(<App />);
+    expect(screen.getByText(/The Git Express \(Commit Train\)/i)).toBeDefined();
+    expect(screen.getByText(/Station Alpha/i)).toBeDefined();
+    expect(screen.getByText(/Station Beta/i)).toBeDefined();
+
+    // Toggle mute
+    const muteBtn = screen.getByRole('button', { name: /Mute chimes/i });
+    fireEvent.click(muteBtn);
+    expect(screen.getByRole('button', { name: /Unmute chimes/i })).toBeDefined();
+
+    // Dispatch train
+    const dispatchBtn = screen.getByRole('button', { name: /Dispatch Train/i });
+    fireEvent.click(dispatchBtn);
+    expect(screen.getByText(/Express in Transit/i)).toBeDefined();
+  });
 });
 
