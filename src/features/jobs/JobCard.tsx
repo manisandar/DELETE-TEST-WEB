@@ -77,6 +77,23 @@ export const JobCard: React.FC<JobCardProps> = ({
           </span>
         </div>
 
+        {/* Bot Alpha AI Matchmaker Advice Pill */}
+        <div className="mt-3 p-2.5 rounded-xl bg-gradient-to-r from-sky-50 to-indigo-50/70 border border-sky-100 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-1.5 text-slate-700">
+            <span className="text-sm">🤖</span>
+            <span className="text-[11px] font-semibold text-sky-900">
+              {job.type === 'Remote' || job.location.toLowerCase().includes('remote')
+                ? 'Alpha says: 100% async & remote harmony! 🚀'
+                : job.salaryMin >= 140000
+                ? 'Alpha says: High compensation & growth potential! 💎'
+                : 'Alpha says: Perfect pair-programming culture match! ✨'}
+            </span>
+          </div>
+          <span className="font-extrabold text-[10px] text-sky-700 bg-white/90 px-2 py-0.5 rounded-full border border-sky-200 shadow-2xs whitespace-nowrap">
+            {88 + (job.id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 12)}% Match
+          </span>
+        </div>
+
         {/* Short description */}
         <p className="mt-3 text-xs text-slate-600 line-clamp-2 leading-relaxed">
           {job.description}

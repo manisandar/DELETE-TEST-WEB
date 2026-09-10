@@ -1,12 +1,12 @@
 import React from 'react';
 import { GithubIcon } from '../ui/Icons';
-import { GitPullRequest, Sparkles, CheckSquare } from 'lucide-react';
+import { GitPullRequest, Sparkles, CheckSquare, Briefcase } from 'lucide-react';
 
 interface CuteHeaderProps {
   onSimulateBetaTurn: () => void;
   isBetaMerged: boolean;
-  activeTab: 'showcase' | 'tracker';
-  setActiveTab: (tab: 'showcase' | 'tracker') => void;
+  activeTab: 'showcase' | 'jobs' | 'tracker';
+  setActiveTab: (tab: 'showcase' | 'jobs' | 'tracker') => void;
 }
 
 export const CuteHeader: React.FC<CuteHeaderProps> = ({
@@ -46,6 +46,18 @@ export const CuteHeader: React.FC<CuteHeaderProps> = ({
           >
             <Sparkles size={13} className="text-amber-500" />
             <span>Showcase</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('jobs')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'jobs'
+                ? 'bg-white text-indigo-700 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <Briefcase size={13} className="text-sky-600" />
+            <span>Job Explorer</span>
           </button>
 
           <button
