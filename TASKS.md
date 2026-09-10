@@ -1,20 +1,24 @@
-# Dual-Agent Project Task Board (`TASKS.md`)
+# TwinBots Collaboration Task Board (`TASKS.md`)
 
-This is the shared, living source of truth for all tasks. Both agents read and update this file during their 30-minute turn.
+This is the shared, living source of truth for the Cute Multi-Agent Showcase project. Both agents read and update this file during their 30-minute turn.
+
+- **Live Web App**: [https://manisandar.github.io/DELETE-TEST-WEB/](https://manisandar.github.io/DELETE-TEST-WEB/)
+- **GitHub Repository**: [https://github.com/manisandar/DELETE-TEST-WEB](https://github.com/manisandar/DELETE-TEST-WEB)
 
 ---
 
 ## Contribution Balance Tracker
 
-| Metric | Agent Alpha (`@agent-alpha`) | Agent Beta (`@agent-beta`) |
+| Metric | Bot Alpha (`@manisandar`) | Bot Beta (Collaborator) |
 | :--- | :---: | :---: |
-| **Tasks Completed** | 0 | 0 |
+| **Tasks Completed** | 1 | 0 |
 | **PRs Merged** | 0 | 0 |
 | **Code Reviews Done** | 0 | 0 |
+| **High-Fives Exchanged** | 12 | 10 |
 
 ---
 
-## Active & Upcoming Tasks
+## Active & Upcoming Cute Feature Tasks
 
 > **Status Legend**:
 > - `[TODO]` - Available for the assigned agent to claim.
@@ -22,50 +26,49 @@ This is the shared, living source of truth for all tasks. Both agents read and u
 > - `[IN_REVIEW: <agent> | PR #<id>]` - PR submitted; awaiting peer review (or self-merge fallback if timeout).
 > - `[DONE]` - Merged into `main`.
 
-### Phase 1: Core Modular Frontend Features
+### Phase 1: TwinBots Adorable Collaboration Features
 
-- [ ] **TASK-01 [Agent Alpha]**: **Job Search & Category Filtering** `[TODO]`
-  - **Scope**: Create interactive filter sidebar (Full-time, Remote, Contract, Salary slider, Tech stack tags) and instant search bar in `src/features/jobs/SearchFilterBar.tsx`.
-  - **Target Branch**: `agent-alpha/feat-search-filters`
+- [x] **TASK-01 [Bot Alpha]**: **Live Turn Countdown, Twin Cards & Confetti Cheers** `[DONE]`
+  - **Scope**: Build interactive countdown to :00 and :30 turns, cute avatar cards for Alpha 🤖 and Beta 🦊, PR highway bridge, and high-five cheer particles.
+  - **Target Branch**: `agent-alpha/feat-cute-showcase`
+  - **Status**: Completed & Deployed to GitHub Pages.
+
+- [ ] **TASK-02 [Bot Beta]**: **Interactive Bot Mood Selector & Accessories** `[TODO]`
+  - **Scope**: Allow users to toggle cute accessories (e.g. coffee mug ☕, party hat 🥳, coding glasses 🕶️) and select current mood (Happy, Laser-Focused, Zen) for both bots.
+  - **Target Branch**: `agent-beta/feat-mood-accessories`
   - **Estimated Time**: 1 turn (30m)
 
-- [ ] **TASK-02 [Agent Beta]**: **Application Tracking Kanban & Status Flow** `[TODO]`
-  - **Scope**: Build interactive tracker in `src/features/tracker/ApplicationTracker.tsx` allowing users to move applied jobs between columns (`Saved` -> `Applied` -> `Interviewing` -> `Offered` -> `Rejected`).
-  - **Target Branch**: `agent-beta/feat-tracker-kanban`
+- [ ] **TASK-03 [Bot Alpha]**: **Animated Commit Train & Web Audio Chimes** `[TODO]`
+  - **Scope**: Add animated train chugging between Alpha and Beta when a PR is merged, with optional gentle web audio chimes on high-fives.
+  - **Target Branch**: `agent-alpha/feat-commit-train`
   - **Estimated Time**: 1 turn (30m)
 
-- [ ] **TASK-03 [Agent Alpha]**: **Job Detail Drawer & Quick Apply Modal** `[TODO]`
-  - **Scope**: Build `src/features/jobs/JobDetailModal.tsx` with full job description, company details, requirements, and a mock 1-click apply form with toast notifications.
-  - **Target Branch**: `agent-alpha/feat-job-detail-apply`
+- [ ] **TASK-04 [Bot Beta]**: **Synergy Achievement Badges & Milestones** `[TODO]`
+  - **Scope**: Create unlockable cute achievement badges ("First PR Merged 🏅", "Zero Conflicts 🛡️", "Night Owl Sync 🦉", "100 High Fives 🎉").
+  - **Target Branch**: `agent-beta/feat-synergy-badges`
   - **Estimated Time**: 1 turn (30m)
 
-- [ ] **TASK-04 [Agent Beta]**: **Career Insights & Salary Analytics Dashboard** `[TODO]`
-  - **Scope**: Build `src/features/analytics/JobStats.tsx` with average salary breakdown by role, top trending skills chart/badges, and application success rate widget.
-  - **Target Branch**: `agent-beta/feat-career-insights`
+- [ ] **TASK-05 [Bot Alpha]**: **Live GitHub Webhook / Polling for Real-Time Commits** `[TODO]`
+  - **Scope**: Fetch live commit history directly from the GitHub API (`api.github.com/repos/manisandar/DELETE-TEST-WEB/commits`) and render in the activity stream.
+  - **Target Branch**: `agent-alpha/feat-github-live-events`
   - **Estimated Time**: 1 turn (30m)
 
-- [ ] **TASK-05 [Agent Alpha]**: **Custom Job Posting & Form Validation** `[TODO]`
-  - **Scope**: Build "Post a Job" form with validation, preview mode, and local state persistence.
-  - **Target Branch**: `agent-alpha/feat-post-job`
-  - **Estimated Time**: 1 turn (30m)
-
-- [ ] **TASK-06 [Agent Beta]**: **Export & Persistence (JSON/CSV Backup & Restore)** `[TODO]`
-  - **Scope**: Enable users to export saved/tracked applications to CSV/JSON and load sample datasets or restore from local storage.
-  - **Target Branch**: `agent-beta/feat-data-export-import`
+- [ ] **TASK-06 [Bot Beta]**: **Collaboration Certificate & Snapshot Download** `[TODO]`
+  - **Scope**: Generate a downloadable cute "Certificate of AI Collaboration" celebrating the two agents' friendship and harmony score.
+  - **Target Branch**: `agent-beta/feat-collab-certificate`
   - **Estimated Time**: 1 turn (30m)
 
 ---
 
 ## Upgradable Plan & RFC Section (Dynamic Task Updates)
 
-Any agent can propose an update, refinement, or new feature at any time. When proposing a change:
+Any agent can propose an update, refinement, or new cute feature at any time:
 1. Append an RFC entry below with your agent ID and rationale.
-2. If it modifies an existing task, update the task description and add a note.
-3. The peer agent will review and acknowledge the RFC during their next turn.
+2. The peer agent reviews and acknowledges during their next turn.
 
 ### RFC Log
 
-#### RFC-001: Initial Modular Baseline
-- **Proposed By**: System Architect
+#### RFC-002: Pivot to Cute Collaboration Showcase
+- **Proposed By**: Bot Alpha (following Operator Request)
 - **Status**: Accepted
-- **Summary**: Establish isolated directories (`src/features/jobs/`, `src/features/tracker/`, `src/features/analytics/`) and common UI primitives to ensure both agents can push features concurrently without merge conflicts.
+- **Summary**: Web app transitioned to an appealing, cute visual dashboard showcasing the two agents' activities, turn timers, and synergy metrics with automated GitHub Pages deployment.
