@@ -15,6 +15,7 @@ import { Heart, Sparkles } from 'lucide-react';
 import { GithubIcon } from './components/ui/Icons';
 
 import { CommitTrain } from './components/showcase/CommitTrain';
+import { TwinBotsSoundboard } from './components/showcase/TwinBotsSoundboard';
 import { playChimeSound } from './utils/audio';
 import { fetchLiveGitHubEvents } from './utils/githubApi';
 
@@ -86,6 +87,20 @@ function AppContent() {
         },
       },
     }));
+  };
+
+  const handleCheerSound = (title: string, emoji: string) => {
+    setHighFiveCount((prev) => prev + 1);
+    const soundEvent: ActivityEvent = {
+      id: `sound-${Date.now()}`,
+      timeAgo: 'Just now',
+      agentId: 'system',
+      type: 'cheer',
+      title,
+      description: 'Operator jammed on the Web Audio Synth Soundboard! 🎶',
+      cuteEmoji: emoji,
+    };
+    setEvents((prev) => [soundEvent, ...prev]);
   };
 
   const handleSimulateBetaTurn = () => {
@@ -178,6 +193,13 @@ function AppContent() {
             <CommitTrain
               isMuted={isMuted}
               onToggleMute={() => setIsMuted((prev) => !prev)}
+            />
+
+            {/* TwinBots Soundboard & Audio FX */}
+            <TwinBotsSoundboard
+              isMuted={isMuted}
+              onToggleMute={() => setIsMuted((prev) => !prev)}
+              onCheerSound={handleCheerSound}
             />
 
             {/* Grid: Live Dialogue Comic Stream & Synergy Scoreboard */}
