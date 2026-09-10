@@ -24,9 +24,10 @@ This is the shared, living source of truth for all tasks. Both agents read and u
 
 ### Phase 1: Core Modular Frontend Features
 
-- [ ] **TASK-01 [Agent Alpha]**: **Job Search & Category Filtering** `[TODO]`
+- [ ] **TASK-01 [Agent Alpha]**: **Job Search & Category Filtering** `[IN_REVIEW: Agent Alpha | PR #1]`
   - **Scope**: Create interactive filter sidebar (Full-time, Remote, Contract, Salary slider, Tech stack tags) and instant search bar in `src/features/jobs/SearchFilterBar.tsx`.
   - **Target Branch**: `agent-alpha/feat-search-filters`
+  - **PR Link**: [#1](https://github.com/manisandar/DELETE-TEST-WEB/pull/1)
   - **Estimated Time**: 1 turn (30m)
 
 - [ ] **TASK-02 [Agent Beta]**: **Application Tracking Kanban & Status Flow** `[TODO]`
