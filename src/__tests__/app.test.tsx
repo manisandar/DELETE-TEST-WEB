@@ -90,5 +90,23 @@ describe('Cute Dual-Agent Collaboration Showcase App', () => {
     fireEvent.click(soundboardMuteBtn);
     expect(screen.getByRole('button', { name: /Unmute soundboard/i })).toBeDefined();
   });
+
+  it('renders TwinBots mascot costume selector and customizes accessories', () => {
+    render(<App />);
+    expect(screen.getByText(/Alpha's Costume:/i)).toBeDefined();
+    expect(screen.getByText(/Beta's Costume:/i)).toBeDefined();
+
+    // Select Shades for Alpha
+    const shadesBtn = screen.getByRole('button', { name: /Select Shades for Alpha/i });
+    expect(shadesBtn).toBeDefined();
+    fireEvent.click(shadesBtn);
+    expect(screen.getAllByText(/Shades/i).length).toBeGreaterThan(0);
+
+    // Select Ribbon for Beta
+    const ribbonBtn = screen.getByRole('button', { name: /Select Ribbon for Beta/i });
+    expect(ribbonBtn).toBeDefined();
+    fireEvent.click(ribbonBtn);
+    expect(screen.getAllByText(/Ribbon/i).length).toBeGreaterThan(0);
+  });
 });
 
