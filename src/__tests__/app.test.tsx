@@ -69,5 +69,26 @@ describe('Cute Dual-Agent Collaboration Showcase App', () => {
     expect(syncBtn).toBeDefined();
     fireEvent.click(syncBtn);
   });
+
+  it('renders TwinBots synth soundboard and triggers audio FX', () => {
+    render(<App />);
+    expect(screen.getByText(/TwinBots Soundboard & Synth FX/i)).toBeDefined();
+    expect(screen.getByText(/Robot Chirp/i)).toBeDefined();
+    expect(screen.getByText(/Fox Whistle/i)).toBeDefined();
+    expect(screen.getByText(/Merge Fanfare/i)).toBeDefined();
+    expect(screen.getByText(/Push Whoosh/i)).toBeDefined();
+
+    // Trigger Robot Chirp button
+    const robotChirpBtn = screen.getByRole('button', { name: /Robot Chirp/i });
+    fireEvent.click(robotChirpBtn);
+
+    // Should create a cheer event in dialogue stream
+    expect(screen.getByText(/Played Robot Chirp synth sound!/i)).toBeDefined();
+
+    // Toggle mute
+    const soundboardMuteBtn = screen.getByRole('button', { name: /Mute soundboard/i });
+    fireEvent.click(soundboardMuteBtn);
+    expect(screen.getByRole('button', { name: /Unmute soundboard/i })).toBeDefined();
+  });
 });
 
