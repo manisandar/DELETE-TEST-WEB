@@ -37,4 +37,14 @@ describe('Job Portal Dual-Agent Collaboration App', () => {
     expect(screen.getByText(/Applied/i)).toBeDefined();
     expect(screen.getByText(/Interviewing/i)).toBeDefined();
   });
+
+  it('toggles Remote Only filter to display only remote opportunities', () => {
+    render(<App />);
+    const remoteButton = screen.getByRole('button', { name: /Remote/i });
+    fireEvent.click(remoteButton);
+
+    expect(screen.getByRole('heading', { name: /Senior Frontend Engineer/i })).toBeDefined();
+    expect(screen.queryByRole('heading', { name: /Staff Cloud Infrastructure Architect/i })).toBeNull();
+  });
 });
+
