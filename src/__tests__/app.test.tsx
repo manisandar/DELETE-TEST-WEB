@@ -108,5 +108,21 @@ describe('Cute Dual-Agent Collaboration Showcase App', () => {
     fireEvent.click(ribbonBtn);
     expect(screen.getAllByText(/Ribbon/i).length).toBeGreaterThan(0);
   });
+
+  it('renders TwinBots terminal simulator and handles command simulation', () => {
+    render(<App />);
+    expect(screen.getByText(/twinbots-pair-terminal/i)).toBeDefined();
+    expect(screen.getByText(/Conflict-Free Namespacing/i)).toBeDefined();
+
+    // Filter by Alpha
+    const alphaFilterBtn = screen.getByRole('button', { name: /Filter terminal by Alpha/i });
+    fireEvent.click(alphaFilterBtn);
+    expect(screen.getAllByText(/alpha@twinbots/i).length).toBeGreaterThan(0);
+
+    // Simulate pair run
+    const runBtn = screen.getByRole('button', { name: /Simulate pair sync command/i });
+    expect(runBtn).toBeDefined();
+    fireEvent.click(runBtn);
+  });
 });
 
