@@ -16,6 +16,7 @@ import { GithubIcon } from './components/ui/Icons';
 
 import { CommitTrain } from './components/showcase/CommitTrain';
 import { TwinBotsSoundboard } from './components/showcase/TwinBotsSoundboard';
+import { TwinBotsTerminal } from './components/showcase/TwinBotsTerminal';
 import { playChimeSound } from './utils/audio';
 import { fetchLiveGitHubEvents } from './utils/githubApi';
 
@@ -200,6 +201,11 @@ function AppContent() {
               isMuted={isMuted}
               onToggleMute={() => setIsMuted((prev) => !prev)}
               onCheerSound={handleCheerSound}
+            />
+
+            {/* TwinBots Pair-Programming Terminal Simulator */}
+            <TwinBotsTerminal
+              onCheer={(title, emoji) => handleCheerSound(title, emoji)}
             />
 
             {/* Grid: Live Dialogue Comic Stream & Synergy Scoreboard */}
