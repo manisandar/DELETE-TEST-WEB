@@ -1,14 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { AgentProfile } from '../../types/showcase';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Palette } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { playBubblePopSound } from '../../utils/audio';
 
 interface AgentTwinCardsProps {
   agents: Record<'alpha' | 'beta', AgentProfile>;
   onHighFive: (agentId: 'alpha' | 'beta') => void;
 }
 
+const ALPHA_ACCESSORIES = [
+  { emoji: '', label: 'Default' },
+  { emoji: '👑', label: 'Crown' },
+  { emoji: '🕶️', label: 'Shades' },
+  { emoji: '🎧', label: 'Headphones' },
+  { emoji: '🚀', label: 'Jetpack' },
+  { emoji: '🎩', label: 'Top Hat' },
+];
+
+const BETA_ACCESSORIES = [
+  { emoji: '', label: 'Default' },
+  { emoji: '🎀', label: 'Ribbon' },
+  { emoji: '👑', label: 'Crown' },
+  { emoji: '🕶️', label: 'Shades' },
+  { emoji: '🎧', label: 'Headphones' },
+  { emoji: '🪄', label: 'Magic Wand' },
+];
+
 export const AgentTwinCards: React.FC<AgentTwinCardsProps> = ({ agents, onHighFive }) => {
+  const [alphaAccessory, setAlphaAccessory] = useState<string>('👑');
+  const [betaAccessory, setBetaAccessory] = useState<string>('🎀');
+
+  const handleSelectAccessory = (agentId: 'alpha' | 'beta', emoji: string) => {
+    playBubblePopSound(false);
+    if (agentId === 'alpha') {
+      setAlphaAccessory(emoji);
+    } else {
+      setBetaAccessory(emoji);
+    }
+  };
+
   const handleHighFive = (agentId: 'alpha' | 'beta') => {
     confetti({
       particleCount: 45,
@@ -29,8 +60,15 @@ export const AgentTwinCards: React.FC<AgentTwinCardsProps> = ({ agents, onHighFi
           {/* Header */}
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center justify-center text-3xl shadow-md transform group-hover:rotate-6 transition-transform">
-                {agents.alpha.avatarEmoji}
+              <div className="relative">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center justify-center text-3xl shadow-md transform group-hover:rotate-6 transition-transform">
+                  {agents.alpha.avatarEmoji}
+                </div>
+                {alphaAccessory && (
+                  <span className="absolute -top-2.5 -right-2 text-xl filter drop-shadow-md animate-bounce">
+                    {alphaAccessory}
+                  </span>
+                )}
               </div>
               <div>
                 <div className="flex items-center gap-2">
@@ -71,6 +109,37 @@ export const AgentTwinCards: React.FC<AgentTwinCardsProps> = ({ agents, onHighFi
             </div>
           </div>
 
+          {/* Cute Accessory Customizer Bar */}
+          <div className="bg-sky-50/60 rounded-xl p-2.5 border border-sky-100 space-y-1.5">
+            <div className="flex items-center justify-between text-[11px] font-bold text-slate-700">
+              <span className="flex items-center gap-1">
+                <Palette size={12} className="text-sky-500" />
+                <span>Alpha's Costume:</span>
+              </span>
+              <span className="text-sky-700">
+                {ALPHA_ACCESSORIES.find((a) => a.emoji === alphaAccessory)?.label || 'None'}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5">
+              {ALPHA_ACCESSORIES.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => handleSelectAccessory('alpha', item.emoji)}
+                  aria-label={`Select ${item.label} for Alpha`}
+                  className={`px-2 py-1 rounded-lg text-xs font-bold border transition-all cursor-pointer flex items-center gap-1 ${
+                    alphaAccessory === item.emoji
+                      ? 'bg-sky-500 text-white border-sky-600 shadow-xs scale-105'
+                      : 'bg-white text-slate-600 border-slate-200 hover:bg-sky-50'
+                  }`}
+                >
+                  <span>{item.emoji || '❌'}</span>
+                  <span className="text-[10px] hidden sm:inline">{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Mini Stats Bar */}
           <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100 text-center">
             <div className="bg-slate-50 rounded-xl p-2">
@@ -108,8 +177,15 @@ export const AgentTwinCards: React.FC<AgentTwinCardsProps> = ({ agents, onHighFi
           {/* Header */}
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-400 to-pink-600 flex items-center justify-center text-3xl shadow-md transform group-hover:-rotate-6 transition-transform">
-                {agents.beta.avatarEmoji}
+              <div className="relative">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-400 to-pink-600 flex items-center justify-center text-3xl shadow-md transform group-hover:-rotate-6 transition-transform">
+                  {agents.beta.avatarEmoji}
+                </div>
+                {betaAccessory && (
+                  <span className="absolute -top-2.5 -right-2 text-xl filter drop-shadow-md animate-bounce">
+                    {betaAccessory}
+                  </span>
+                )}
               </div>
               <div>
                 <div className="flex items-center gap-2">
@@ -147,6 +223,37 @@ export const AgentTwinCards: React.FC<AgentTwinCardsProps> = ({ agents, onHighFi
               <code className="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-100 text-purple-700 font-semibold">
                 agent-beta/*
               </code>
+            </div>
+          </div>
+
+          {/* Cute Accessory Customizer Bar */}
+          <div className="bg-purple-50/60 rounded-xl p-2.5 border border-purple-100 space-y-1.5">
+            <div className="flex items-center justify-between text-[11px] font-bold text-slate-700">
+              <span className="flex items-center gap-1">
+                <Palette size={12} className="text-purple-500" />
+                <span>Beta's Costume:</span>
+              </span>
+              <span className="text-purple-700">
+                {BETA_ACCESSORIES.find((a) => a.emoji === betaAccessory)?.label || 'None'}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5">
+              {BETA_ACCESSORIES.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => handleSelectAccessory('beta', item.emoji)}
+                  aria-label={`Select ${item.label} for Beta`}
+                  className={`px-2 py-1 rounded-lg text-xs font-bold border transition-all cursor-pointer flex items-center gap-1 ${
+                    betaAccessory === item.emoji
+                      ? 'bg-purple-600 text-white border-purple-700 shadow-xs scale-105'
+                      : 'bg-white text-slate-600 border-slate-200 hover:bg-purple-50'
+                  }`}
+                >
+                  <span>{item.emoji || '❌'}</span>
+                  <span className="text-[10px] hidden sm:inline">{item.label}</span>
+                </button>
+              ))}
             </div>
           </div>
 
